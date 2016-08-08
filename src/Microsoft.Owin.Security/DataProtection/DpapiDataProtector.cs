@@ -6,24 +6,26 @@ namespace Microsoft.Owin.Security.DataProtection
 {
     internal class DpapiDataProtector : IDataProtector
     {
-        private readonly System.Security.Cryptography.DpapiDataProtector _protector;
+//        private readonly System.Security.Cryptography.DpapiDataProtector _protector;
 
         public DpapiDataProtector(string appName, string[] purposes)
         {
-            _protector = new System.Security.Cryptography.DpapiDataProtector(appName, "Microsoft.Owin.Security.IDataProtector", purposes)
-            {
-                Scope = DataProtectionScope.CurrentUser
-            };
+//            _protector = new System.Security.Cryptography.DpapiDataProtector(appName, "Microsoft.Owin.Security.IDataProtector", purposes)
+//            {
+//                Scope = DataProtectionScope.CurrentUser
+//            };
         }
 
         public byte[] Protect(byte[] userData)
         {
-            return _protector.Protect(userData);
+            return new byte[0];
+//            return _protector.Protect(userData);
         }
 
         public byte[] Unprotect(byte[] protectedData)
         {
-            return _protector.Unprotect(protectedData);
+            return new byte[0];
+//            return _protector.Unprotect(protectedData);
         }
     }
 }

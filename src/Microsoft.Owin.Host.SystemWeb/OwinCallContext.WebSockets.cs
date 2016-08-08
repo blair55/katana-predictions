@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web.WebSockets;
+//using System.Web.WebSockets;
 using Microsoft.Owin.Host.SystemWeb.CallEnvironment;
 using Microsoft.Owin.Host.SystemWeb.Infrastructure;
 using Microsoft.Owin.Host.SystemWeb.WebSockets;
@@ -42,36 +42,36 @@ namespace Microsoft.Owin.Host.SystemWeb
             _env.ResponseStatusCode = 101;
             _webSocketFunc = webSocketFunc;
 
-            var options = new AspNetWebSocketOptions();
-            options.SubProtocol = GetWebSocketSubProtocol(_env, acceptOptions);
-
-            OnStart();
-            _httpContext.AcceptWebSocketRequest(AcceptCallback, options);
+//            var options = new AspNetWebSocketOptions();
+//            options.SubProtocol = GetWebSocketSubProtocol(_env, acceptOptions);
+//
+//            OnStart();
+//            _httpContext.AcceptWebSocketRequest(AcceptCallback, options);
         }
 
-        private async Task AcceptCallback(AspNetWebSocketContext webSocketContext)
-        {
-            OwinWebSocketWrapper wrapper = null;
-            try
-            {
-                wrapper = new OwinWebSocketWrapper(webSocketContext);
-                await _webSocketFunc(wrapper.Environment);
-                // Making sure to close the web socket is not necessary, Asp.Net will do this for us. 
-                wrapper.Dispose();
-            }
-            catch (Exception ex)
-            {
-                if (wrapper != null)
-                {
-                    wrapper.Cancel();
-                    wrapper.Dispose();
-                }
-
-                // traced as warning here because it is re-thrown
-                Trace.WriteWarning(Resources.Trace_WebSocketException, ex);
-                throw;
-            }
-        }
+//        private async Task AcceptCallback(AspNetWebSocketContext webSocketContext)
+//        {
+//            OwinWebSocketWrapper wrapper = null;
+//            try
+//            {
+//                wrapper = new OwinWebSocketWrapper(webSocketContext);
+//                await _webSocketFunc(wrapper.Environment);
+//                // Making sure to close the web socket is not necessary, Asp.Net will do this for us. 
+//                wrapper.Dispose();
+//            }
+//            catch (Exception ex)
+//            {
+//                if (wrapper != null)
+//                {
+//                    wrapper.Cancel();
+//                    wrapper.Dispose();
+//                }
+//
+//                // traced as warning here because it is re-thrown
+//                Trace.WriteWarning(Resources.Trace_WebSocketException, ex);
+//                throw;
+//            }
+//        }
 
         private static string GetWebSocketSubProtocol(AspNetDictionary env, IDictionary<string, object> accpetOptions)
         {
